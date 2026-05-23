@@ -1,41 +1,31 @@
 {
+  "buildCommand": null,
+  "outputDirectory": "src",
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/src/index.html"
-    },
-    {
       "source": "/login",
-      "destination": "/src/pages/login.html"
+      "destination": "/pages/login.html"
     },
     {
       "source": "/login.html",
-      "destination": "/src/pages/login.html"
+      "destination": "/pages/login.html"
     },
     {
       "source": "/register",
-      "destination": "/src/pages/register.html"
+      "destination": "/pages/register.html"
     },
     {
       "source": "/register.html",
-      "destination": "/src/pages/register.html"
+      "destination": "/pages/register.html"
     },
     {
       "source": "/dashboard",
-      "destination": "/src/pages/dashboard.html"
+      "destination": "/pages/dashboard.html"
     },
     {
       "source": "/dashboard.html",
-      "destination": "/src/pages/dashboard.html"
-    },
-    {
-      "source": "/js/:path*",
-      "destination": "/src/js/:path*"
-    },
-    {
-      "source": "/css/:path*",
-      "destination": "/src/css/:path*"
+      "destination": "/pages/dashboard.html"
     }
   ]
 }

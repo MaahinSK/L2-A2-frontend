@@ -19,6 +19,9 @@ export const showLoading = (elementId, loading = true) => {
   if (!element) return;
   
   if (loading) {
+    if (!element.getAttribute('data-original-text')) {
+      element.setAttribute('data-original-text', element.innerHTML);
+    }
     element.disabled = true;
     element.innerHTML = '<div class="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div> Loading...';
   } else {

@@ -4,6 +4,7 @@
   "description": "DevPulse Issue Tracker Frontend",
   "scripts": {
     "build:css": "tailwindcss -i ./src/input.css -o ./src/css/output.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./src/css/output.css",
     "start": "node serve.js"
   },
   "devDependencies": {

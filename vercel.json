@@ -1,39 +1,41 @@
 {
-  "version": 2,
-  "builds": [
+  "cleanUrls": true,
+  "rewrites": [
     {
-      "src": "/*.html",
-      "use": "@vercel/static"
+      "source": "/",
+      "destination": "/src/index.html"
     },
     {
-      "src": "/js/**",
-      "use": "@vercel/static"
+      "source": "/login",
+      "destination": "/src/pages/login.html"
     },
     {
-      "src": "/css/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/index.html"
+      "source": "/login.html",
+      "destination": "/src/pages/login.html"
     },
     {
-      "src": "/login",
-      "dest": "/login.html"
+      "source": "/register",
+      "destination": "/src/pages/register.html"
     },
     {
-      "src": "/register",
-      "dest": "/register.html"
+      "source": "/register.html",
+      "destination": "/src/pages/register.html"
     },
     {
-      "src": "/dashboard",
-      "dest": "/dashboard.html"
+      "source": "/dashboard",
+      "destination": "/src/pages/dashboard.html"
     },
     {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/dashboard.html",
+      "destination": "/src/pages/dashboard.html"
+    },
+    {
+      "source": "/js/:path*",
+      "destination": "/src/js/:path*"
+    },
+    {
+      "source": "/css/:path*",
+      "destination": "/src/css/:path*"
     }
   ]
 }

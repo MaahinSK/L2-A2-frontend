@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - DevPulse</title>
+    <link rel="stylesheet" href="/css/output.css">
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen flex items-center justify-center px-4">
+        <div class="max-w-md w-full">
+            <div class="text-center mb-8">
+                <a href="/" class="text-3xl font-bold text-blue-600">DevPulse</a>
+                <h2 class="mt-6 text-2xl font-bold text-gray-900">Create Account</h2>
+                <p class="mt-2 text-gray-600">Join DevPulse today</p>
+            </div>
+            
+            <div class="card">
+                <form id="signupForm">
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                            Full Name
+                        </label>
+                        <input type="text" id="name" name="name" required 
+                               class="input-field" placeholder="John Doe">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                            Email Address
+                        </label>
+                        <input type="email" id="email" name="email" required 
+                               class="input-field" placeholder="john@example.com">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                            Password
+                        </label>
+                        <input type="password" id="password" name="password" required 
+                               class="input-field" placeholder="••••••••">
+                        <p class="text-xs text-gray-500 mt-1">Must be at least 6 characters</p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="role" class="block text-sm font-medium text-gray-700 mb-2">
+                            Role
+                        </label>
+                        <select id="role" name="role" class="input-field">
+                            <option value="contributor">Contributor</option>
+                            <option value="maintainer">Maintainer</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary w-full">Create Account</button>
+                </form>
+                
+                <p class="mt-4 text-center text-sm text-gray-600">
+                    Already have an account? 
+                    <a href="/login.html" class="text-blue-600 hover:text-blue-700 font-medium">
+                        Sign in
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { handleSignup, redirectIfLoggedIn } from '/js/auth.js';
+        
+        // Redirect if already logged in
+        redirectIfLoggedIn();
+        
+        // Handle form submission
+        const form = document.getElementById('signupForm');
+        form.addEventListener('submit', handleSignup);
+    </script>
+</body>
+</html>

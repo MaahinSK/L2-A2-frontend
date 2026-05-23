@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - DevPulse</title>
+    <link rel="stylesheet" href="/css/output.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-8">
+                    <h1 class="text-2xl font-bold text-blue-600">DevPulse</h1>
+                    <div id="userRole" class="text-sm font-medium px-2 py-1 rounded-full bg-blue-100 text-blue-700"></div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span id="userName" class="text-gray-700"></span>
+                    <button id="logoutBtn" class="btn-danger text-sm px-3 py-1">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h2 class="text-3xl font-bold text-gray-900">Issues Dashboard</h2>
+                <p class="text-gray-600 mt-1">Track and manage all issues</p>
+            </div>
+            <button onclick="window.showCreateModal()" class="btn-primary">
+                + Create New Issue
+            </button>
+        </div>
+
+        <!-- Filters -->
+        <div class="card mb-6">
+            <div class="grid md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
+                    <select id="sort" class="input-field" onchange="window.applyFilters()">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Filter by Type</label>
+                    <select id="filterType" class="input-field" onchange="window.applyFilters()">
+                        <option value="">All Types</option>
+                        <option value="bug">Bug</option>
+                        <option value="feature_request">Feature Request</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Filter by Status</label>
+                    <select id="filterStatus" class="input-field" onchange="window.applyFilters()">
+                        <option value="">All Status</option>
+                        <option value="open">Open</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="resolved">Resolved</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="hidden text-center py-8">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <p class="mt-2 text-gray-600">Loading issues...</p>
+        </div>
+
+        <!-- Issues List -->
+        <div id="issuesList" class="space-y-4">
+            <!-- Issues will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Create Issue Modal -->
+    <div id="createModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold">Create New Issue</h3>
+                    <button onclick="window.closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                </div>
+                <form id="createIssueForm">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Title *</label>
+                        <input type="text" id="title" required maxlength="150" class="input-field" placeholder="Brief description of the issue">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Description *</label>
+                        <textarea id="description" rows="5" required minlength="20" class="input-field" placeholder="Detailed explanation..."></textarea>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Type *</label>
+                        <select id="type" required class="input-field">
+                            <option value="bug">Bug Report</option>
+                            <option value="feature_request">Feature Request</option>
+                        </select>
+                    </div>
+                    <div class="flex gap-3">
+                        <button type="button" onclick="window.closeModal()" class="btn-secondary flex-1">Cancel</button>
+                        <button type="submit" id="createSubmit" class="btn-primary flex-1">Create Issue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Issue Modal -->
+    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg max-w-2xl w-full mx-4">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold">Edit Issue</h3>
+                    <button onclick="window.closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                </div>
+                <form id="editIssueForm">
+                    <input type="hidden" id="editIssueId">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                        <input type="text" id="editTitle" required maxlength="150" class="input-field">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                        <textarea id="editDescription" rows="5" required minlength="20" class="input-field"></textarea>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Type</label>
+                        <select id="editType" required class="input-field">
+                            <option value="bug">Bug Report</option>
+                            <option value="feature_request">Feature Request</option>
+                        </select>
+                    </div>
+                    <div class="flex gap-3">
+                        <button type="button" onclick="window.closeModal()" class="btn-secondary flex-1">Cancel</button>
+                        <button type="submit" id="editSubmit" class="btn-primary flex-1">Update Issue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { getUser } from '/js/api.js';
+        import { requireAuth, handleLogout, isMaintainer, isAuthenticated } from '/js/auth.js';
+        import { loadIssues, handleCreateIssue, applyFilters } from '/js/issues.js';
+        
+        // Check authentication
+        requireAuth();
+        
+        // Load user data
+        const user = getUser();
+        if (user) {
+            document.getElementById('userName').textContent = `Welcome, ${user.name}`;
+            document.getElementById('userRole').textContent = user.role.toUpperCase();
+        }
+        
+        // Load issues
+        loadIssues();
+        
+        // Handle logout
+        document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+        
+        // Handle create issue form
+        const createForm = document.getElementById('createIssueForm');
+        createForm.addEventListener('submit', handleCreateIssue);
+        
+        // Make functions available globally
+        window.applyFilters = applyFilters;
+        window.showCreateModal = () => {
+            document.getElementById('createModal').classList.remove('hidden');
+            document.getElementById('createIssueForm').reset();
+        };
+        window.closeModal = () => {
+            document.getElementById('createModal').classList.add('hidden');
+            document.getElementById('editModal').classList.add('hidden');
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "devpulse-frontend",
+  "version": "1.0.0",
+  "description": "DevPulse Issue Tracker Frontend",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./src/css/output.css --watch",
+    "start": "node serve.js"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

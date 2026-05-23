@@ -7,6 +7,6 @@ const isProduction = window.location.hostname !== 'localhost' &&
 
 export const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:5000/api'
-  : 'https://l2-a2-backend.vercel.app/api';
+  : 'https://l2-a2-backend-maahin-sikders-projects.vercel.app/api';
 
 export const APP_NAME = 'DevPulse';

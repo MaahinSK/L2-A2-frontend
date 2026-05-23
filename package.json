@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "DevPulse Issue Tracker Frontend",
   "scripts": {
-    "build:css": "tailwindcss -i ./src/input.css -o ./src/css/output.css --watch",
-    "build": "tailwindcss -i ./src/input.css -o ./src/css/output.css",
+    "build:css": "npx tailwindcss -i ./src/input.css -o ./src/css/output.css --watch",
+    "build": "npx tailwindcss -i ./src/input.css -o ./src/css/output.css",
     "start": "node serve.js"
   },
   "devDependencies": {

@@ -4,7 +4,7 @@
   "description": "DevPulse Issue Tracker Frontend",
   "scripts": {
     "build:css": "npx tailwindcss -i ./src/input.css -o ./src/css/output.css --watch",
-    "build": "npx tailwindcss -i ./src/input.css -o ./src/css/output.css",
+    "build": "echo \"CSS already pre-built\"",
     "start": "node serve.js"
   },
   "devDependencies": {

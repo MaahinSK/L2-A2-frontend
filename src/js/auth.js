@@ -43,7 +43,7 @@ export const handleLogin = async (event) => {
       
       // Redirect to dashboard
       setTimeout(() => {
-        window.location.href = '/dashboard.html';
+        window.location.href = '/pages/dashboard.html';
       }, 1000);
     }
   } catch (error) {
@@ -77,7 +77,7 @@ export const handleSignup = async (event) => {
       
       // Redirect to login page
       setTimeout(() => {
-        window.location.href = '/login.html';
+        window.location.href = '/pages/login.html';
       }, 1500);
     }
   } catch (error) {
@@ -94,20 +94,20 @@ export const handleLogout = () => {
   removeUser();
   showToast('Logged out successfully');
   setTimeout(() => {
-    window.location.href = '/login.html';
+    window.location.href = '/pages/login.html';
   }, 500);
 };
 
 // Check auth and redirect if not authenticated
 export const requireAuth = () => {
   if (!isAuthenticated()) {
-    window.location.href = '/login.html';
+    window.location.href = '/pages/login.html';
   }
 };
 
 // Redirect if already logged in
 export const redirectIfLoggedIn = () => {
   if (isAuthenticated()) {
-    window.location.href = '/dashboard.html';
+    window.location.href = '/pages/dashboard.html';
   }
 };

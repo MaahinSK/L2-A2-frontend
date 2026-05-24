@@ -4,8 +4,8 @@ A collaborative platform for software teams to report bugs, suggest features, an
 
 ## 🌐 Live URLs
 
-- **Frontend**: `[Add your frontend URL]`
-- **Backend API**: `[Add your backend URL]`
+- **Frontend**: `https://l2-a2-frontend.vercel.app/`
+- **Backend API**: `https://l2-a2-frontend.vercel.app/`
 
 ## 🛠️ Tech Stack
 
